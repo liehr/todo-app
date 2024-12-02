@@ -1,0 +1,15 @@
+<div class="task card mb-2 shadow-sm draggable bg-white">
+  <div class="card-body">
+    <h6 class="card-title fw-bold text-primary">{{ task.title }}</h6>
+    <p class="card-text text-muted">{{ task.description || 'No description available.' }}</p>
+    <button class="btn btn-sm btn-outline-primary me-2" (click)="openEditModal()">Edit</button>
+    <button class="btn btn-sm btn-outline-danger" (click)="removeTask()">Remove</button>
+
+  </div>
+</div>
+
+<app-edit-task-modal *ngIf="isModalOpen"
+                     [task]="task"
+                     (close)="closeEditModal()"
+                     (save)="saveTask($event)">
+</app-edit-task-modal>

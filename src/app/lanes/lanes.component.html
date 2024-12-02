@@ -1,0 +1,32 @@
+<div class="row g-3">
+  <div class="col-md-4" *ngFor="let lane of lanes; let i = index">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">{{ lane.title }}</h5>
+        <button *ngIf="i === 0" class="btn btn-light btn-sm fw-bold" (click)="addTask()">Add Task</button>
+      </div>
+
+      <!-- a simple div that handles onDrop and dragOver events -->
+      <div class="card-body bg-light"
+           (drop)="onDrop($event, i)"
+           (dragover)="onDragOver($event)">
+
+        <!-- A special element that can hold structural directives without adding new elements to the DOM  -->
+        <ng-container *ngIf="lane.tasks.length > 0; else emptyLane">
+
+          <!-- a task component template that can be placed on lanes -->
+          <app-task *ngFor="let task of lane.tasks"
+                  [task]="task"
+                  (remove)="removeTaskFromLane(i, task)"
+                  draggable="true"
+                  (dragstart)="onDragStart($event, task)">
+          </app-task>
+        </ng-container>
+        <ng-template #emptyLane>
+          <!-- show this text when lane is empty -->
+          <p class="text-center text-muted">No tasks yet.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

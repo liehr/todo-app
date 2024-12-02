@@ -1,0 +1,13 @@
+.card {
+  min-height: 300px;
+  border: 1px solid #ddd;
+  background-color: #f8f9fa;
+}
+.card-body {
+  min-height: 200px;
+  background-color: #fff;
+  border: dashed 2px #ddd;
+}
+.card-body:hover {
+  background-color: #f1f1f1;
+}
